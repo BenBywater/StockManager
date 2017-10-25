@@ -14,24 +14,20 @@ public class ReceiveMessages implements Runnable {
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	}
 	
-	public void PrintMessage(String userInput) throws IOException
+	public void PrintMessage() throws IOException
 	{
-		
+		System.out.println("Server: " + in.readLine());
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while(true)
 		{
 			try {
-					System.out.println("echo: " + in.readLine());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				PrintMessage();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}
-		
-
+		}	
+	}
 }
