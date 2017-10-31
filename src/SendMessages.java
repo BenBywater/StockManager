@@ -9,6 +9,7 @@ public class SendMessages implements Runnable {
 	public PrintWriter out = null;
 	public String userInput = null;
 	public BufferedReader stdln = null;
+	public boolean running = true;
 	
 	public SendMessages(Socket client) throws IOException
 	{
@@ -22,15 +23,24 @@ public class SendMessages implements Runnable {
 		out.println(command);
 	}
 
+	public void StopRunning()
+	{
+		running = false;
+	}
+	
 	@Override
 	public void run() {
-		try {
-			while ((userInput = stdln.readLine()) != null) {
-			    SendCommand(userInput);
+		while(running)
+		{
+			try {
+				while ((userInput = stdln.readLine()) != null) {
+				    SendCommand(userInput);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+		
 	}
 	
 	

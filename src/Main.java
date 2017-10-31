@@ -5,12 +5,20 @@ import java.lang.Thread;
 public class Main {
 
 	public Socket client = null;
-	public DataOutputStream os = null;
-    public DataInputStream is = null;
+	public static String ipAddress = "10.80.211.211";
 	
 	public static void main(String[] args) {
 		try {
-			Socket client = new Socket("10.5.37.154", 5000);
+			System.out.println("Do you want to use the static IP Address? Y/N");
+			BufferedReader stdln = new BufferedReader(new InputStreamReader(System.in));
+			String userInput = stdln.readLine();
+			if(userInput.equals("N") || userInput.equals("n"))
+			{
+				System.out.println("Enter IP Address");
+				userInput = stdln.readLine();
+				ipAddress = userInput;
+			}
+			Socket client = new Socket(ipAddress, 5000);
 			System.out.println("Connection is " + client.isConnected());
 			
 			SendMessages send = new SendMessages(client);
@@ -27,5 +35,5 @@ public class Main {
 			e.printStackTrace();
 			}
 	}
-
+		
 }
