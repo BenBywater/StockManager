@@ -8,14 +8,14 @@ public class SendMessages implements Runnable {
 	public Socket clientSocket = null;
 	public PrintWriter out = null;
 	public String userInput = null;
-	public BufferedReader stdln = null;
+	public BufferedReader in = null;
 	public boolean running = true;
 	
 	public SendMessages(Socket client) throws IOException
 	{
 		clientSocket = client;
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		stdln = new BufferedReader(new InputStreamReader(System.in));
+		in = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
 	public void SendCommand(String command)
@@ -33,7 +33,7 @@ public class SendMessages implements Runnable {
 		while(running)
 		{
 			try {
-				while ((userInput = stdln.readLine()) != null) {
+				while ((userInput = in.readLine()) != null) {
 				    SendCommand(userInput);
 				}
 			} catch (IOException e) {

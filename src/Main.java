@@ -5,7 +5,7 @@ import java.lang.Thread;
 public class Main {
 
 	public Socket client = null;
-	public static String ipAddress = "10.80.211.211";
+	public static String ipAddress = "10.80.192.103";
 	
 	public static void main(String[] args) {
 		try {
