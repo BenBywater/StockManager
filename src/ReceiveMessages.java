@@ -25,12 +25,19 @@ public class ReceiveMessages implements Runnable {
 	public void PrintMessage() throws IOException
 	{
 		
-		String str1 = in.readLine();
+		String serverOut = in.readLine();
 		
-		System.out.println("Server: " + str1);
+		System.out.println("Server: " + serverOut);
 		
-		if(str1.contains("BOUGHT"))
-			checkForBoughtShares(str1);
+		if(serverOut.contains("BUY"))
+		{
+			checkForBoughtShares(serverOut);
+		}
+		else if(serverOut.contains("SELL"))
+		{
+			RemoveStock(serverOut);
+		}
+			
 	}
 
 	@Override
@@ -48,12 +55,26 @@ public class ReceiveMessages implements Runnable {
 	
 	public void checkForBoughtShares(String result) throws IOException
 	{
-		
 		String[] tokens = result.split(":"); 
-		String stockName = tokens[3].split(" ")[1];
-		String stockAmount = tokens[2].split(" ")[0];
-		boughtShares.put(stockName.concat(tokens[4]), stockAmount);		
+		String stockName = tokens[3];
+		String stockAmount = tokens[2];
+		boughtShares.put(stockName, stockAmount);		
 		System.out.println(stockAmount + " shares in " + stockName.concat(tokens[4]));
 
+	}
+	
+	public void RemoveStock(String serverOut)
+	{
+		String[] tokens = serverOut.split(":");
+		String stock = boughtShares.get(tokens[3]);
+		int stockstock = Integer.parseInt(stock);
+		int tokensStock = Integer.parseInt(tokens[2]);
+		
+		int stockAmount = stockstock - tokensStock;
+		
+		String finalStock = Integer.toString(stockAmount);
+		
+		boughtShares.put(tokens[3], finalStock);
+		
 	}
 }

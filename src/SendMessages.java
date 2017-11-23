@@ -14,11 +14,13 @@ public class SendMessages implements Runnable {
 	public BufferedReader in = null;
 	public boolean running = true;
 	public ReceiveMessages rmGlobal = null;
+	public String userID = "";
 	
-	public SendMessages(Socket client, ReceiveMessages rm) throws IOException
+	public SendMessages(Socket client, ReceiveMessages rm, String ID) throws IOException
 	{
 		rmGlobal = rm;
 		clientSocket = client;
+		userID = ID;
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
@@ -27,6 +29,16 @@ public class SendMessages implements Runnable {
 	
 	public void SendCommand(String command)
 	{
+		
+		if(command.contains("BUY"))
+		{
+			command += ":" + userID;
+		}
+		else if(command.contains("BUY"))
+		{
+			command += ":" + userID;
+		}
+			
 		out.println(command);
 	}
 
