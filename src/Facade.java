@@ -9,9 +9,7 @@ public class Facade {
 	public PrintWriter out = null;
 	public String userInput = null;
 	public BufferedReader in = null;
-	public boolean running = true;
-	public ReceiveMessages rmGlobal = null;
-	public String ID = "";
+	String ID = "";
 	
 	public Facade(Socket client) throws IOException
 	{
