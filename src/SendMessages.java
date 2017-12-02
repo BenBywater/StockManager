@@ -34,9 +34,12 @@ public class SendMessages implements Runnable {
 		{
 			command += ":" + userID;
 		}
-		else if(command.contains("BUY"))
+		else if(command.contains("SELL"))
 		{
 			command += ":" + userID;
+		}else if(command.contains("WATCH"))
+		{
+			// start thread
 		}
 			
 		out.println(command);

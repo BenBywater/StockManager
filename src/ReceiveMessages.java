@@ -36,8 +36,7 @@ public class ReceiveMessages implements Runnable {
 		else if(serverOut.contains("SELL"))
 		{
 			RemoveStock(serverOut);
-		}
-			
+		}	
 	}
 
 	@Override
